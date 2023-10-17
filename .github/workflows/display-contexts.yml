@@ -1,0 +1,22 @@
+on: [push, workflow_dispatch]
+jobs:
+  display-contexts:
+    runs-on: ubuntu-latest
+    steps:
+      # Display every [GitHub Contexts](https://docs.github.com/en/actions/learn-github-actions/contexts).
+      # WARNING: this could lead to execution of malicious content. See
+      # [Understanding the risk of script injections](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections).
+      # From [Documentation for github.event objects](https://github.com/orgs/community/discussions/27058#discussioncomment-3254474):
+      - run: "echo 'github: ${{ toJson(github) }}'"
+      - run: "echo 'env: ${{ toJson(env) }}'"
+      - run: "echo 'vars: ${{ toJson(vars) }}'"
+      - run: "echo 'job: ${{ toJson(job) }}'"
+      # May be only for reusable workflows. See [jobs context](https://docs.github.com/en/actions/learn-github-actions/contexts#jobs-context).
+      #- run: "echo 'jobs: ${{ toJson(jobs) }}'"
+      - run: "echo 'steps: ${{ toJson(steps) }}'"
+      - run: "echo 'runner: ${{ toJson(runner) }}'"
+      - run: "echo 'secrets: ${{ toJson(secrets) }}'"
+      - run: "echo 'strategy: ${{ toJson(strategy) }}'"
+      - run: "echo 'matrix: ${{ toJson(matrix) }}'"
+      - run: "echo 'needs: ${{ toJson(needs) }}'"
+      - run: "echo 'inputs: ${{ toJson(inputs) }}'"
